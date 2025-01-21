@@ -1,0 +1,24 @@
+package Recurrsiontopic;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Printing_first_K_Multiples_of_N {
+
+    public static void multiples(int num , int k){
+        if( k == 1){
+            System.out.print(num + " ");
+            return;
+        }
+        multiples(num,k-1);
+        System.out.print(num * k + " ");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int k = sc.nextInt();
+        multiples(num , k);
+    }
+}

@@ -1,0 +1,33 @@
+package Recurrsiontopic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class practice_subsets {
+    public static List<List<Integer>> func(int[] arr, int target, int ind, int sum, List ls, List ans){
+        if(ind >= arr.length){
+            if(sum == target){
+                ans.add(new ArrayList<>(ls));
+            }
+            return ans;
+        }
+        if(sum < target){
+            ls.add(arr[ind]);
+            sum = sum + arr[ind];
+            func(arr,target, ind+1, sum,ls,ans);
+            sum = sum - arr[ind];
+            ls.remove(ls.size() -1);
+        }
+        func(arr,target,ind +1,sum,ls,ans);
+        return ans;
+    }
+
+    public static void main(String[] args) {
+    List<List<Integer>> ans = new ArrayList<>();
+    List<Integer> ls = new ArrayList<>();
+    int[] arr = {3,2,1,6,4,5};
+    int target = 6;
+        System.out.println(func(arr,target,0,0,ls,ans));
+
+    }
+}

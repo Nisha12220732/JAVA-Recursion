@@ -1,0 +1,39 @@
+package Recurrsiontopic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class practice_subsets {
+    public static boolean func(int[] arr, int target, int ind, int sum,List ls, List ans){
+        if(ind >= arr.length){
+            if(sum ==  target){
+                ans.add(new ArrayList<>(ls));
+                return true;
+            }
+            return false;
+        }
+        if(sum < target) {
+            ls.add(arr[ind]);
+            sum += arr[ind];
+            if (func(arr, target, ind + 1, sum, ls, ans)) {
+                return true;
+            }
+            ls.remove(ls.size() - 1);
+            sum -= arr[ind];
+        }
+            if (func(arr, target, ind + 1, sum, ls, ans)) {
+                return true;
+            }
+
+        return false;
+    }
+    public static void main(String[] args) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        int[] arr = {1,2,3,4,2};
+        int target = 4;
+        func(arr,target,0,0,ls,ans);
+        System.out.println(ans);
+    }
+
+}

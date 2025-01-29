@@ -1,0 +1,32 @@
+package Recurrsiontopic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class CombinationSum_WithRepetition {
+    public static List<List<Integer>> func(int[] arr,int target,int ind,List ls,List ans){
+        if(ind >= arr.length){
+            if(target == 0){
+                ans.add(new ArrayList<>(ls));
+            }
+            return ans;
+        }
+        if(arr[ind] <= target){
+            ls.add(arr[ind]);
+            func(arr,target - arr[ind],ind,ls,ans);
+            ls.remove(ls.size() -1);
+        }
+        func(arr,target,ind +1,ls,ans);
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3,1,2,4};
+        int target = 5;
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        System.out.println(func(arr,target,0,ls,ans));
+    }
+}
+

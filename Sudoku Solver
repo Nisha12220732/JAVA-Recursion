@@ -1,0 +1,97 @@
+package practice;
+
+public class SudokuSolver {
+
+    public static final int SIZE = 9;
+    public static final int SUBGRID_SIZE = 3;
+
+    public static boolean solveBoard(int[][] board) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+
+                if (board[row][col] == 0) {
+
+                    for (int num = 1; num <= SIZE; num++) {
+                        if (isValidPlacement(board, num, row, col)) {
+                            board[row][col] = num;
+
+                            if (solveBoard(board)) {
+                                return true;
+                            } else {
+                                board[row][col] = 0;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    private static boolean isValidPlacement(int[][] board, int num, int row, int col) {
+        // Check the row
+        for (int i = 0; i < SIZE; i++) {
+            if (board[row][i] == num) {
+                return false;
+            }
+        }
+
+        // Check the column
+        for (int i = 0; i < SIZE; i++) {
+            if (board[i][col] == num) {
+                return false;
+            }
+        }
+
+        // Check the 3x3 subgrid
+        int subgridRowStart = (row / SUBGRID_SIZE) * SUBGRID_SIZE;
+        int subgridColStart = (col / SUBGRID_SIZE) * SUBGRID_SIZE;
+        for (int i = subgridRowStart; i < subgridRowStart + SUBGRID_SIZE; i++) {
+            for (int j = subgridColStart; j < subgridColStart + SUBGRID_SIZE; j++) {
+                if (board[i][j] == num) {
+                    return false;
+                }
+            }
+        }
+
+        return true; // If all checks pass, the placement is valid
+    }
+
+    // Method to print the Sudoku board
+    private static void printBoard(int[][] board) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                // Print the value followed by a space
+                System.out.print(board[row][col] == 0 ? "." : board[row][col]);
+                System.out.print(" "); // Space between numbers
+            }
+            System.out.println(); // New line after each row
+        }
+    }
+    public static void main(String[] args) {
+
+        int[][] board = {
+                {7, 0, 2, 0, 5, 0, 6, 0, 0},
+                {0, 0, 0, 0, 0, 3, 0, 0, 0},
+                {1, 0, 0, 0, 0, 9, 5, 0, 0},
+                {8, 0, 0, 0, 0, 0, 0, 9, 0},
+                {0, 4, 3, 0, 0, 0, 7, 5, 0},
+                {0, 9, 0, 0, 0, 0, 0, 0, 8},
+                {0, 0, 9, 7, 0, 0, 0, 0, 5},
+                {0, 0, 0, 2, 0, 0, 0, 0, 0},
+                {0, 0, 7, 0, 4, 0, 2, 0, 3}
+        };
+
+        if (solveBoard(board)) {
+            System.out.println("Sudoku solved successfully!");
+            printBoard(board);
+        } else {
+            System.out.println("Unsolvable Sudoku board.");
+        }
+    }
+
+
+}
+

@@ -1,0 +1,25 @@
+import java.util.*;
+public class Main{
+    static int func(int[] arr, int i, int target){
+        if(i<0){
+            return 0;
+        }
+        if(arr[i] == target){
+            return 1 + func(arr,i-1,target);
+        }
+        else{
+            return func(arr,i-1,target);
+        }
+        
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0;i<n;i++){
+            arr[i] = sc.nextInt();
+        }
+        int target = sc.nextInt();
+        System.out.println(func(arr,n-1,target));
+    }
+}

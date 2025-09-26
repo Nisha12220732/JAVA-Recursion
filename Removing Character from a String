@@ -1,0 +1,18 @@
+import java.util.*;
+class Main {
+    static String func(String s, int i,char c, String ans){
+        if(i <0){
+            return ans;
+        }
+        if(s.charAt(i) != c)
+        ans = s.charAt(i) + ans;
+        return func(s,i-1,c,ans);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        String ans = new String();
+        char ch = sc.next().charAt(0);
+        System.out.println(func(s,s.length()-1,ch,ans));
+    }
+}

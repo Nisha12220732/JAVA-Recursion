@@ -1,0 +1,15 @@
+import java.util.*;
+class Main {
+    static void func(String s, int i){
+        if(i <0){
+            return;
+        }
+        func(s,i-1);
+        System.out.print(s.charAt(i) + " ");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        func(s,s.length()-1);
+    }
+}
